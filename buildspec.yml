@@ -1,0 +1,15 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      terraform: 1.5
+  build:
+    commands:
+      - terraform init
+      - terraform validate
+      - terraform plan -out=tfplan
+      - terraform apply -auto-approve tfplan
+  post_build:
+    commands:
+      - echo "Infra deployed! Check ec2_public_ip output."
